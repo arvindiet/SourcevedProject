@@ -1,0 +1,61 @@
+﻿@using BOL;
+@{
+      List<Employee> elist = ViewData["elist"] as List<Employee>;
+      List<EmployeeFurtherDetails>elist1 =  ViewData["elist1"] as List<EmployeeFurtherDetails>;
+}
+
+
+<html>
+
+    <meta>
+    <head>
+
+    </head>
+      
+
+    <div align="left">
+        <h1><u><i>@TempData["message"]</i></u></h1>
+    </div>
+    <div>
+        <a href="/home/RegisterEmp">Register new Employee</a>
+    </div>
+    <body>
+        <form action="/home/index" method="get">
+           <div>
+            <table class="table">
+               <tr>
+                <th>First_Name</th>
+                <th>Last_Name</th>
+                 <th>DOB</th>
+                 <th>Gender</th>
+                 <th> Joining_Date</th>
+                 <th> Ending_Date </th>
+                 <th>Salary</th>
+               </tr>
+               @{
+                foreach(Employee e in elist){
+                    if(elist!=null){
+                        foreach(EmployeeFurtherDetails ed in elist1){
+                            <tr>
+                                <td>@e.First_Name </td>
+                                <td>@e.Last_Name</td>
+                                <td>@e.DOB</td>
+                                <td>@e.Gender</td>
+                                <td>@ed.Joining_Date</td>
+                                <td>@ed.Ending_Date</td>
+                                <td>@ed.Salary</td>
+                                <td><a href="/home/RemoveEmployee?id=@e.Id">Remove</a> / <a href="/home/EditEmployee?id=@e.Id">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                }
+               }
+            </table>
+           </div>
+        
+        
+        
+        </form>
+
+    </body>
+</html>
